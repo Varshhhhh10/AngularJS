@@ -1,0 +1,39 @@
+<html ng-app="mathApp">
+    <head>
+        <title> Math operation App</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    </head>
+    <body ng-controller="mathController">
+        <h1> Math operation</h1>
+        Enter a number:
+        <input type="number" ng-model="inputNumber">
+        <button ng-click="calcSq()"> Calculate Sauare</button>
+        <button ng-click="calcFact()">Calculate Factorial</button>
+        <h2> Result: {{ sqresult }}</h2>
+        <h2> Result: {{ factresult }}</h2>
+        <script>
+            angular.module('mathApp',[])
+            .controller('mathController',function($scope){
+                $scope.calcSq=function(){
+                    $scope.sqresult= $scope.inputNumber*$scope.inputNumber;
+                };
+                $scope.calcFact=function(){
+                    if($scope.inputNumber<0){
+                        $scope.factresult='cannot find facorial in negative numbers';
+                    }else{
+                        $scope.factresult=factorial($scope.inputNumber)
+                    }
+                };
+                function factorial(n){
+                    if(n==0||n==1){
+                        return 1;
+                    
+                    }else {
+                    return n*factorial(n-1);
+                    }
+                };
+
+            });
+        </script>
+    </body>
+</html>

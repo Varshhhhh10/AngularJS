@@ -1,0 +1,29 @@
+<html ng-app="studentApp">
+    <head>
+        <title> student app</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    </head>
+    <body ng-controller="studentCtrl">
+        <h1> student details</h1>
+        <h3> original student details</h3>
+        <ul ng-repeat="student in students">
+        <li><strong>name:</strong> {{ student.firstName+' '+student.lastName }}</li>
+        <li><strong>city:</strong>{{ student.city }}</li>
+        </ul>
+        <h3> details in uppecase</h3>
+        <ul ng-repeat="student in students">
+            <li><strong>name:</strong>{{ student.firstName+' '+student.lastName| uppercase }}</li>
+            <li> <strong>city:</strong>{{ student.city |uppercase }}</li>
+        </ul>
+        <script>
+            angular.module('studentApp',[])
+            .controller('studentCtrl',function($scope){
+                $scope.students=[
+                    {firstName:'ram',lastName:'kumar',city:'ayodhya'},
+                    {firstName:'sham',lastName:'lal',city:'dwaraka'},
+                    {firstName: 'shankar',lastName:'mahadevan',city:'kailash'}
+                ];
+            });
+        </script>
+    </body>
+</html>

@@ -1,0 +1,58 @@
+<html ng-app="crudApp">
+    <head>
+        <title> crud app</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    </head>
+    <body ng-controller="crudController">
+        <h1> user management</h1>
+        enter user name:
+        <input type="text" ng-model="name">
+        enter user age:
+        <input type="number" ng-model="age">
+        <button ng-click="addUser()">add</button>
+        <table>
+            <thead>
+                <th>  name </th>
+                <th> age </th>
+                <th>  action </th>
+            </thead>
+            <tbody>
+                <tr ng-repeat="user in users">
+                    <td>{{ user.name }}</td>
+                    <td> {{ user.age }}</td>
+                    <td><button ng-click="edit(user)">edit</button></td>
+                    <td><button ng-click="delete(user)">delete</button></td>
+                </tr>
+            </tbody>
+        </table>
+        <script>
+            angular.module('crudApp',[])
+            .controller('crudController',function($scope){
+                $scope.users=[
+                    {name:'ram',age:37},
+                    {name:'sita',age: 36},
+                    {name:'lakshman',age:34}
+                ];
+                $scope.addUser=function(){
+                    $scope.users.push({name:$scope.name,age:$scope.age});
+                    $scope.name = '';
+                    $scope.age = '';
+
+                };
+                $scope.edit=function(user){
+                    var index = $scope.users.indexOf(user);
+
+                    var updatedName=prompt('enter updated name',user.name);
+                    var updatedAge=prompt('enter updated age',user.age);
+                    if(!(updatedName==null && updatedAge==null)){
+                        var updatedUser={name:updatedName,age:updatedAge};
+                        $scope.users.splice(index,1,updatedUser);
+                    }
+                };
+                $scope.delete=function(index){
+                    $scope.users.splice(index,1);
+                };
+            });
+        </script>
+    </body>
+</html>
